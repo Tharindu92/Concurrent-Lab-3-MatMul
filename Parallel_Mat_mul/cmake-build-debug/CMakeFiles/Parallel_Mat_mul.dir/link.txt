@@ -1,0 +1,1 @@
+/usr/bin/c++   -g   CMakeFiles/Parallel_Mat_mul.dir/parallel_mat_mul.cpp.o  -o Parallel_Mat_mul 

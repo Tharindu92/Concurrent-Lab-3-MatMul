@@ -1,0 +1,12 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/jinna/Documents/Concurrent-Lab-3-MatMul/Serial_Mat_mul/serial_mat_mul.cpp
+iostream
+-
+

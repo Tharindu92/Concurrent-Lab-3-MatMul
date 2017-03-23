@@ -1,0 +1,3 @@
+/home/jinna/Documents/Concurrent-Lab-3-MatMul/Serial_Mat_mul/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/jinna/Documents/Concurrent-Lab-3-MatMul/Serial_Mat_mul/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/jinna/Documents/Concurrent-Lab-3-MatMul/Serial_Mat_mul/cmake-build-debug/CMakeFiles/Serial_Mat_mul.dir

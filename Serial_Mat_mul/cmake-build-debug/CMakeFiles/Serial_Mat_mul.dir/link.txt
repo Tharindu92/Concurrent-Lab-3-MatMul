@@ -1,0 +1,1 @@
+/usr/bin/c++   -g   CMakeFiles/Serial_Mat_mul.dir/serial_mat_mul.cpp.o  -o Serial_Mat_mul 

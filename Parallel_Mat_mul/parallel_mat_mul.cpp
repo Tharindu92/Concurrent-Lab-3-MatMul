@@ -36,21 +36,16 @@ int main() {
 }
 
 double *matrixMul_double_parallel(double* matrix1, double* matrix2, int size){
-    double sum = 0.0;
     int i,j,k;
     double* ans = (double*) malloc(size * size * sizeof(double));
-    #pragma omp parallel num_threads(thread_count) private(i,j,k) shared(matrix1, matrix2, ans)
-    {
-        #pragma omp for schedule(static) reduction(+:sum)
+    #pragma omp parallel for
         for(i=0; i < size; i++){
             for(j=0; j < size; j++){
-                sum = 0;
                 for(k=0; k< size; k++){
-                    sum += (*(matrix1+(i*size+k))) * (*(matrix2+(k*size+j)));
+                    ans[i*size+j] += (*(matrix1+(i*size+k))) * (*(matrix2+(k*size+j)));
                 }
-                ans[i*size+j] = sum;
             }
         }
-    }
+
     return ans;
 }

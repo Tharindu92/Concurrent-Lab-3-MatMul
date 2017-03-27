@@ -1,4 +1,5 @@
 #include <iostream>
+#include <stdlib.h>
 using namespace std;
 
 double *matrixMul_double_serial(double* matrix1, double* matrix2, int size);

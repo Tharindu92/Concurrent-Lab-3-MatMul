@@ -1,18 +1,18 @@
 #include <iostream>
 #include <omp.h>
 #include <stdlib.h>
+#include <chrono>
 using namespace std;
+using namespace std::chrono;
 
 double *matrixMul_double_parallel(double* matrix1, double* matrix2, int size);
 
 double* matrix1;
 double* matrix2;
 double* ans;
-int thread_count = 4;
 
 int main() {
     int i,j,size,t_size;
-    clock_t begin, end;
     double time_spent;
     srand(time(NULL));
     for(i = 0; i<10 ; i++){
@@ -24,11 +24,11 @@ int main() {
             *(matrix1 + j) = random();
             *(matrix2 + j) = random();
         }
-        begin = clock();
-        ans = matrixMul_double_parallel(matrix1,matrix2,size);
-        end = clock();
-        time_spent = (double)(end - begin)/ CLOCKS_PER_SEC;
-        cout << "Time spent = " <<time_spent << "\nSize = " << size <<endl;
+        high_resolution_clock::time_point begin = high_resolution_clock::now();
+        ans = matrixMul_double_serial(matrix1,matrix2,size);
+        high_resolution_clock::time_point end = high_resolution_clock::now();
+        duration<double> time_spent = duration_cast<duration<double>>(end - begin);
+        cout << "Time spent = " <<time_spent.count() << "\nSize = " << size <<endl;
 
     }
 

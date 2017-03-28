@@ -2,6 +2,7 @@
 #include <omp.h>
 #include <stdlib.h>
 #include <chrono>
+#include <immintrin.h>
 using namespace std;
 using namespace std::chrono;
 
@@ -55,9 +56,15 @@ void matrixMul_double_parallel(double **matrix1, double **matrix2, double **ans,
     #pragma omp parallel for
     for(int i=0; i < size; i++){
         for(int j=0; j < size; j++){
-            for(int k=0; k< size; k++){
-                ans[i][j] += matrix1[i][k] * matrix2[k][j];
+            __m256d avx_reg;
+            avx_reg = _mm256_setzero_pd();
+            for (int k = 0; k < size; k += 4) {
+                avx_reg = _mm256_add_pd(avx_reg, _mm256_mul_pd(_mm256_loadu_pd(&matrix1[i][k]),_mm256_loadu_pd(&matrix2[k][j])));
             }
+            __m256d sum = _mm256_hadd_pd(avx_reg, avx_reg);
+            __m128d sum_high = _mm256_extractf128_pd(sum, 1);
+            __m128d out = _mm_add_pd(sum_high, _mm256_castpd256_pd128(sum));
+            _mm_store_sd(&ans[i][j], out);
         }
     }
 }
